@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Customers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- datatables ui css -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.3/css/buttons.jqueryui.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--/datatables ui css -->
+
+    <!-- datatables ui js -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.jqueryui.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.3/js/buttons.jqueryui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.3/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.3/js/buttons.colVis.min.js"></script>
+    <!--/datatables ui js -->
+
+    <!-- ajax library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--/ajax library -->
+
+    <!-- scripts -->
+    <script>
+        $(document).ready(function() {
+            var table = $('#customers').DataTable({
+                lengthMenu: [
+                    [ 10, 25, 50, -1 ],
+                    [ '10', '25', '50', 'All' ]
+                ],
+                buttons: [
+                    {
+                        extend:    'copyHtml5',
+                        text:      '<i class="fa fa-files-o"></i>',
+                        titleAttr: 'Copy'
+                    },
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="fa fa-file-excel-o"></i>',
+                        titleAttr: 'Excel'
+                    },
+                    {
+                        extend:    'csvHtml5',
+                        text:      '<i class="fa fa-file-text-o"></i>',
+                        titleAttr: 'CSV'
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="fa fa-file-pdf-o"></i>',
+                        titleAttr: 'PDF'
+                    },
+                    {
+                        extend:    'print',
+                        text:      '<i class="fa fa-print"></i>',
+                        titleAttr: 'Print'
+                    }
+                ],
+                pagingType: "full_numbers",
+                language: {
+                    /*"decimal":        "",
+                     "emptyTable":     "No data available in table",
+                     "info":           "Showing _START_ to _END_ of _TOTAL_ entries",*/
+                    "info":           "Showing _START_ to _END_ of _TOTAL_ customers",
+                    /*"infoEmpty":      "Showing 0 to 0 of 0 entries",
+                     "infoFiltered":   "(filtered from _MAX_ total entries)",
+                     "infoPostFix":    "",
+                     "thousands":      ",",
+                     "lengthMenu":     "Show _MENU_ entries",*/
+                    "lengthMenu":     "Show _MENU_ rows",
+                    /*"loadingRecords": "Loading...",
+                     "processing":     "Processing...",
+                     "search":         "Search:",
+                     "zeroRecords":    "No matching records found",
+                     "paginate": {
+                     "first":      "First",
+                     "last":       "Last",
+                     "next":       "Next",
+                     "previous":   "Previous"
+                     },
+                     "aria": {
+                     "sortAscending":  ": activate to sort column ascending",
+                     "sortDescending": ": activate to sort column descending"
+                     }*/
+                },
+                "columnDef": [
+                    {
+                        // The `data` parameter refers to the data for the cell (defined by the
+                        // `data` option, which defaults to the column being worked with, in
+                        // this case `data: 0`.
+                        "render": function ( data, type, row ) {
+                            return data + ' ' + row[3] + '';
+                        },
+                        "targets": 2
+                    },
+                    {
+                        "visible": false,
+                        "targets": [3]
+                    }
+                ]
+            });
+            table.buttons().container().insertBefore('#customers_length');
+            $('input[type="search"]').attr('placeholder', 'Search');
+        } );
+
+    </script>
+    <!--/scripts -->
+
+    <!-- css styles -->
+    <style>
+        h1 {
+            text-align: center;
+        }
+        thead th {
+            cursor : pointer;
+        }
+    </style>
+    <!--/css styles -->
+
+</head>
+
+<body>
+
+<h1>Customers</h1>
+
+<table id="customers" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <!--<th>First Name</th>-->
+        <th>Last Name</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>ID</th>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <!--<th>First Name</th>-->
+        <th>Last Name</th>
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr th:each="customer, step : ${customers}">
+        <td th:text="${step.index + 1}"></td>
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.firstName}"></td>
+        <td th:text="${customer.lastName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>s
