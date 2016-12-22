@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2016 at 01:59 PM
+-- Generation Time: Dec 22, 2016 at 01:58 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -23,55 +23,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `address`
 --
 
-CREATE TABLE `customer` (
+CREATE TABLE `address` (
   `id` bigint(20) NOT NULL,
-  `address_id` bigint(20) DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `street` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `address`
 --
 
-INSERT INTO `customer` (`id`, `address_id`, `first_name`, `last_name`) VALUES
-(1, 1, 'Johirul', 'Islam'),
-(2, 2, 'Johirul', 'Islam'),
-(3, 3, 'Johirul', 'Islam');
+INSERT INTO `address` (`id`, `city`, `country`, `postal_code`, `street`) VALUES
+(1, 'city', 'country', 'postal_code', 'street'),
+(2, 'city', 'country', 'postal_code', 'street'),
+(3, 'city', 'country', 'postal_code', 'street');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `customer`
+-- Indexes for table `address`
 --
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FKglkhkmh2vyn790ijs6hiqqpi` (`address_id`);
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT for table `address`
 --
-ALTER TABLE `customer`
+ALTER TABLE `address`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `FKglkhkmh2vyn790ijs6hiqqpi` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
