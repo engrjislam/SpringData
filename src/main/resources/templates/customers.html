@@ -27,10 +27,6 @@
     <script src="https://cdn.datatables.net/buttons/1.2.3/js/buttons.colVis.min.js"></script>
     <!--/datatables ui js -->
 
-    <!-- ajax library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--/ajax library -->
-
     <!-- scripts -->
     <script>
         $(document).ready(function() {
@@ -67,6 +63,21 @@
                     }
                 ],
                 pagingType: "full_numbers",
+                "columnDefs": [
+                    {
+                        // The `data` parameter refers to the data for the cell (defined by the
+                        // `data` option, which defaults to the column being worked with, in
+                        // this case `data: 0`.
+                        "render": function ( data, type, row ) {
+                            return data + ' ' + row[3];
+                        },
+                        "targets": 2
+                    },
+                    {
+                        "visible": false,
+                        "targets": [ 3 ]
+                    }
+                ],
                 language: {
                     /*"decimal":        "",
                      "emptyTable":     "No data available in table",
@@ -92,27 +103,11 @@
                      "sortAscending":  ": activate to sort column ascending",
                      "sortDescending": ": activate to sort column descending"
                      }*/
-                },
-                "columnDef": [
-                    {
-                        // The `data` parameter refers to the data for the cell (defined by the
-                        // `data` option, which defaults to the column being worked with, in
-                        // this case `data: 0`.
-                        "render": function ( data, type, row ) {
-                            return data + ' ' + row[3] + '';
-                        },
-                        "targets": 2
-                    },
-                    {
-                        "visible": false,
-                        "targets": [3]
-                    }
-                ]
+                }
             });
             table.buttons().container().insertBefore('#customers_length');
             $('input[type="search"]').attr('placeholder', 'Search');
         } );
-
     </script>
     <!--/scripts -->
 
@@ -164,4 +159,4 @@
 
 </body>
 
-</html>s
+</html>
