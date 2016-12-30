@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2016 at 01:59 PM
+-- Generation Time: Dec 08, 2016 at 10:00 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -27,20 +27,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customer` (
-  `id` bigint(20) NOT NULL,
-  `address_id` bigint(20) DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `address_id`, `first_name`, `last_name`) VALUES
-(1, 1, 'Johirul', 'Islam'),
-(2, 2, 'Johirul', 'Islam'),
-(3, 3, 'Johirul', 'Islam');
+INSERT INTO `customer` (`id`, `first_name`, `last_name`) VALUES
+(1, 'Jack', 'Bauer'),
+(2, 'Chloe', 'O''Brian'),
+(3, 'Kim', 'Bauer'),
+(4, 'David', 'Palmer'),
+(5, 'Michelle', 'Dessler');
 
 --
 -- Indexes for dumped tables
@@ -50,8 +51,7 @@ INSERT INTO `customer` (`id`, `address_id`, `first_name`, `last_name`) VALUES
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FKglkhkmh2vyn790ijs6hiqqpi` (`address_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -61,17 +61,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `FKglkhkmh2vyn790ijs6hiqqpi` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`);
-
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
